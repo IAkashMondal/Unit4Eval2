@@ -1,35 +1,67 @@
 import React from "react";
 
-const AddProduct = () => {
+const AddProduct = ({data,setData,trig,setTrig}) => {
   // TODO: Remove below const and instead import them from chakra
-  const Button = () => <div />;
-  const Modal = () => <div />;
-  const ModalBody = () => <div />;
-  const Input = () => <div />;
-  const Select = () => <div />;
-  const RadioGroup = () => <div />;
-  const Radio = () => <div />;
+
+  let [visibleForm,setVisibleForm]=React.useState(false)
+  let [formdata,setFormdata]=React.useState({imageSrc:"https://picsum.photos/seed/picsum2/421/261",title:"",category:"",gender:"",price:""})
+  let productsHandle=({data,setData,trig,setTrig})=>{
+    setVisibleForm(!visibleForm)
+  }
+  let productsHandleChange=(e)=>{
+      setFormdata({...formdata,
+        [e.target.name]:e.target.value
+      })}
+  let handlesubmit=(e)=>{
+    e.preventDefault()
+    if(formdata.imageSrc !== ""
+      && formdata.gender !== "" 
+      && formdata.category !== "" 
+      && formdata.price !== "" 
+      &&formdata.title !== "")
+    {
+      
+      fetch(`  http://localhost:8080/products`,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(formdata)}).then((resp)=>(resp.json())).then((resp)=>{
+          setData([...data,resp])
+          console.log(data)
+          setTrig(!trig)
+        })
+    }
+    else{
+      alert("empty")
+    }
+    setVisibleForm(!visibleForm)
+  
+  }
 
   return (
+    
     <>
-      <Button my={4} data-cy="add-product-button"></Button>
-      <Modal>
-        <ModalBody pb={6}>
-          <Input data-cy="add-product-title" />
-          <Select data-cy="add-product-category">
-            <option data-cy="add-product-category-shirt"></option>
-            <option data-cy="add-product-category-pant"></option>
-            <option data-cy="add-product-category-jeans"></option>
-          </Select>
-          <RadioGroup data-cy="add-product-gender">
-            <Radio data-cy="add-product-gender-male"></Radio>
-            <Radio data-cy="add-product-gender-female"></Radio>
-            <Radio data-cy="add-product-gender-unisex"></Radio>
-          </RadioGroup>
-          <Input data-cy="add-product-price" />
-          <Button data-cy="add-product-submit-button"></Button>
-        </ModalBody>
-      </Modal>
+<button onClick={productsHandle} data-cy="add-product-button">Add new product</button>
+      { visibleForm ? <div>
+              <form onSubmit={handlesubmit}>
+        
+        <input onChange={productsHandleChange} name="title" value={formdata.title} placeholder="Add product title" data-cy="add-product-title" />
+        <select onChange={productsHandleChange} name="category"  data-cy="add-product-category">
+          <option>Select Category</option>
+          <option value="Shirt" data-cy="add-product-category-shirt">Shirts</option>
+          <option value="Pant" data-cy="add-product-category-pant">Pants</option>
+          <option value="jeans" data-cy="add-product-category-jeans">Jeans</option>
+        </select>
+        <div  data-cy="add-product-gender">Gender
+          <label> Male<input onChange={productsHandleChange} name="gender" value={"Male"} type="radio" data-cy="add-product-gender-male"></input></label>
+          <label>Female<input onChange={productsHandleChange} name="gender" value={"Female"} type="radio" data-cy="add-product-gender-female"></input></label>
+          <label>Unisex<input onChange={productsHandleChange} name="gender" value={"Unisex"} type="radio" data-cy="add-product-gender-unisex"></input></label>
+        </div>
+        <label>Product price<input onChange={productsHandleChange} value={formdata.price} name="price" placeholder="Add Price" data-cy="add-product-price" /></label>
+        <button  data-cy="add-product-submit-button">Submit</button>
+      
+    </form>
+      </div>: <></>
+      }
     </>
   );
 };

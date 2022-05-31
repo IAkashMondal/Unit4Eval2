@@ -1,0 +1,16 @@
+.names{
+    display:flex;
+      justify-content: space-around;
+    color: rgb(243, 10, 10);
+    font-size: larger;
+      padding: 10px; 
+  }.grid{
+    display: grid;
+    margin: auto;
+    justify-content: center;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows:repeat(auto) ;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    gap: 50px;
+  
+  }

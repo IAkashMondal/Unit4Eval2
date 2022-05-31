@@ -1,24 +1,22 @@
+// import { Box, Heading, Stack, Tag, TagLabel } from "@chakra-ui/react";
 import React from "react";
-
-const Product = () => {
-  // TODO: Remove below const and instead import them from chakra
-  const Text = () => <div />;
-  const Image = () => <div />;
-  const Box = () => <div />;
-  const Stack = () => <div />;
-  const Heading = () => <div />;
-  const Tag = () => <div />;
-  const TagLabel = () => <div />;
+import style from "../pagination.module.css"
+const Product = ({elem}) => {
+console.log(elem)
   return (
-    <Stack data-cy="product">
-      <Image data-cy="product-image" />
-      <Text data-cy="product-category"></Text>
-      <Tag>
-        <TagLabel data-cy="product-gender"></TagLabel>
-      </Tag>
-      <Heading data-cy="product-title"></Heading>
-      <Box data-cy="product-price"></Box>
-    </Stack>
+  <div className={style.grid}>
+      <div data-cy="product" key ={elem.id}>
+      <img data-cy="product-image"  style={{width:"100%"}} src="https://picsum.photos/seed/picsum2/421/261" alt=""/>
+      <div>
+      <div className={style.names}>
+      <h5 data-cy="product-category" >{elem.category}</h5>
+      <h4 data-cy="product-gender" >{elem.gender}</h4>
+      </div>
+      </div>
+      <h2 data-cy="product-title">{elem.title}</h2>
+      <h3 data-cy="product-price">Rs{elem.price}/unit</h3>
+    </div>
+  </div>
   );
 };
 

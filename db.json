@@ -70,6 +70,30 @@
       "price": "300",
       "imageSrc": "https://picsum.photos/seed/picsum2/421/261",
       "id": 9
+    },
+    {
+      "imageSrc": "https://picsum.photos/seed/picsum2/421/261",
+      "title": "bikr",
+      "category": "Shirt",
+      "gender": "Male",
+      "price": "2000",
+      "id": 10
+    },
+    {
+      "imageSrc": "https://picsum.photos/seed/picsum2/421/261",
+      "title": "masai",
+      "category": "Pant",
+      "gender": "Male",
+      "price": "2b",
+      "id": 11
+    },
+    {
+      "imageSrc": "https://mma.prnewswire.com/media/1631809/Masai_Logo.jpg?p=publish",
+      "title": "masai",
+      "category": "Shirt",
+      "gender": "Male",
+      "price": "2b",
+      "id": 12
     }
   ]
 }
