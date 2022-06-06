@@ -1,12 +1,12 @@
 import React from "react";
 
-const AddProduct = ({data,setData,trig,setTrig}) => {
+const AddProduct = ({data,setData,checked,setchecked}) => {
   // TODO: Remove below const and instead import them from chakra
 
-  let [visibleForm,setVisibleForm]=React.useState(false)
+  let [HideForm,setHideForm]=React.useState(false)
   let [formdata,setFormdata]=React.useState({imageSrc:"https://picsum.photos/seed/picsum2/421/261",title:"",category:"",gender:"",price:""})
-  let productsHandle=({data,setData,trig,setTrig})=>{
-    setVisibleForm(!visibleForm)
+  let productsHandle=({data,setData,checked,setchecked})=>{
+    setHideForm(!HideForm)
   }
   let productsHandleChange=(e)=>{
       setFormdata({...formdata,
@@ -21,19 +21,18 @@ const AddProduct = ({data,setData,trig,setTrig}) => {
       &&formdata.title !== "")
     {
       
-      fetch(`  http://localhost:8080/products`,{
+      fetch(`http://localhost:8080/products`,{
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body:JSON.stringify(formdata)}).then((resp)=>(resp.json())).then((resp)=>{
-          setData([...data,resp])
-          console.log(data)
-          setTrig(!trig)
+        body:JSON.stringify(formdata)}).then((r)=>(r.json())).then((r)=>{
+          setData([...data,r])
+          setchecked(!checked)
         })
     }
     else{
       alert("empty")
     }
-    setVisibleForm(!visibleForm)
+    setHideForm(!HideForm)
   
   }
 
@@ -41,7 +40,7 @@ const AddProduct = ({data,setData,trig,setTrig}) => {
     
     <>
 <button onClick={productsHandle} data-cy="add-product-button">Add new product</button>
-      { visibleForm ? <div>
+      { HideForm ? <div>
               <form onSubmit={handlesubmit}>
         
         <input onChange={productsHandleChange} name="title" value={formdata.title} placeholder="Add product title" data-cy="add-product-title" />

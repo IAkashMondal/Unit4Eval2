@@ -2,7 +2,6 @@
 import React from "react";
 import style from "../pagination.module.css"
 const Product = ({elem}) => {
-console.log(elem)
   return (
   <div className={style.grid}>
       <div data-cy="product" key ={elem.id}>

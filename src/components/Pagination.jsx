@@ -35,7 +35,7 @@ const Pagination = ({page,setPage,checked,setChecked,totalpage,limit,setLimit}) 
            }}>Next</Button>
 
       <Button data-cy="pagination-last-button"
-       disabled={page <=1}
+       disabled={page=== Math.ceil(totalpage/limit) }
        onClick={()=>{
         setPage(Math.ceil(totalpage/limit)
   )}}>Last</Button>
